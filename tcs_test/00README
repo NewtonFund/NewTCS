@@ -1,0 +1,22 @@
+This holds various TCS code snippets for comparing NOVAS and SOFA libraries.
+
+Requirements:
+This installation assumes that SOFA and NOVAS have been build and installed on the target platform (Linux or Windows)
+The final compiled shared .so libraries should be copied to /usr/local/lib
+Header file shold be copied to /usr/local/include
+
+cygwin is required for test one Windows systems.
+Compilation of the libraries and code is the same as under Linux
+
+gnuplot is required to produce plots
+On windows systems and X-windows emulator will be needed to display out from .gpi scripts
+Alternatively use the raw output data in your preferred graphing package.    
+
+Notes:
+The go* scripts compile, run, combine data and perform gnuplots
+
+Prefix/suffixes:
+lats & latn = and north and south latitude soace
+latlon = explore latitude and longitude space 
+obj = object position
+

@@ -1,0 +1,10 @@
+#!/bin/bash
+cd novas/
+./build
+./objn > objn.dat
+cd ../sofa/
+./build
+./objn > objn.dat
+cd ..
+paste novas/objn.dat sofa/objn.dat > objn.dat
+gnuplot -e 'load "objn.gpi"'

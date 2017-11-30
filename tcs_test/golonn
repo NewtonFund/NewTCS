@@ -1,0 +1,10 @@
+#!/bin/bash
+cd novas/
+./build
+./lonn > lonn.dat
+cd ../sofa/
+./build
+./lonn > lonn.dat
+cd ..
+paste novas/lonn.dat sofa/lonn.dat > lonn.dat
+gnuplot -e 'load "lonn.gpi"'

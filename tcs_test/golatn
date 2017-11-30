@@ -1,0 +1,10 @@
+#!/bin/bash
+cd novas/
+./build
+./latn > latn.dat
+cd ../sofa/
+./build
+./latn > latn.dat
+cd ..
+paste novas/latn.dat sofa/latn.dat > latn.dat
+gnuplot -e 'load "latn.gpi"'

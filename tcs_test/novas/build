@@ -1,0 +1,10 @@
+#!/bin/bash
+cc test.c -o test -lnovas -lsofa_c -lm
+cc lats.c -o lats -lnovas -lsofa_c -lm
+cc latn.c -o latn -lnovas -lsofa_c -lm
+cc latn2.c -o latn2 -lnovas -lsofa_c -lm
+cc lonn.c -o lonn -lnovas -lsofa_c -lm
+cc objn.c -o objn -lnovas -lsofa_c -lm
+cc latlon.c -o latlon -lnovas -lsofa_c -lm
+cc latlona.c -o latlona -lnovas -lsofa_c -lm
+cc rotang.c -o rotang -lnovas -lsofa_c -lm

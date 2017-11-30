@@ -1,0 +1,10 @@
+#!/bin/bash
+cd novas/
+./build
+./lats > lats.dat
+cd ../sofa/
+./build
+./lats > lats.dat
+cd ..
+paste novas/lats.dat sofa/lats.dat > lats.dat
+gnuplot -e 'load "lats.gpi"'

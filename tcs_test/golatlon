@@ -1,0 +1,10 @@
+#!/bin/bash
+cd novas/
+./build
+./latlon > latlon.dat
+cd ../sofa/
+./build
+./latlon > latlon.dat
+cd ..
+paste novas/latlon.dat sofa/latlon.dat > latlon.dat
+gnuplot -e 'load "latlon.gpi"'

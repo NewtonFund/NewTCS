@@ -1,0 +1,82 @@
+Overview
+We compared the NOVAS and SOFA C libraries and available python wrappers.
+A test ICRS catalogue entry was created and transformed to an observation azimuth and altitude for a specific topographic location and atmospheric temperature / pressure.
+
+Test Platform
+Final test platform will be 64-bit version of Window 10 Professional and developed using GNU gcc or MS VisualStudio.
+A suitable development Windows PC in not currently available (on order) so testing was done on 64-bit Linux systems and code compiled with GNU gcc version 5.4 compiler.
+
+The astrometric software version downladed used in the evaluation versions were:
+  NOVAS C library: 3.1
+  NOVAS_Py python wrapper version: 3.1.1
+  Solar system ephemerides: DE405
+
+  SOFA core C library: sofa_c-20170420
+  PySOFA wrapper version: 0.1.1 
+
+Initial build and test done under Centos 6.9 with python 2.6
+Novas C and SOFA libraries and pysofa wrapper installed and worked without modification on Centos 6.9
+
+NOVAS_Py is not fully compatible with python 2.6 so attempted was made to installing 2.7 in parallel but is not officially supported under Centos 6.x 
+This produced unwanted side-effects in the operating system and preventing updates and further software installation. Testing was transferred to the database test server running Linux running 64-bit Ubuntu 16.04 LTS.
+
+The newest pysofa-0.1.1 is a beta release from Jan 2011 with no subsequent updates.
+It does not appear to be well supported and only provides an incomplete set of wrappers for SOFA functions. Missing are several particularly useful high-level "xxxxx13" functions.
+The support of C-library version of SOFA is good and the latest 2017 release was build from source.
+
+The NOVAS_Py provides a better set of matching functions compared to pysofa with wrappers provided for all equivalent C functions. 
+The documentation says that the wrappers match the equivalent in the C libraries "in the most part". During testing it was found that at least important one high level function, equ2hor(), differed both in the order of arguments and in the form parameters were returned. 
+
+
+SOFA C-library tests
+
+A transform from an ICRS star catalogue entry to topographic ALT/AZ co-ordinates including atmospheric corrections can be achieved via the single function iauAtco13(). The reverse is done using iauAtoc13().
+The errors generated when performing a forward followed by a reverse transform are, err_RA = 0.0000043 and err_DEC = 0.000016.
+
+
+NOVAS Library tests
+The C-library difference between low and high accuracy was 
+diff_ALT = 0.000000003 and diff_AZ = 0.000000004 degrees
+
+In both high and low accuracy modes the python value C-library
+diff_ALT = 0.000629 diff_AZ = 0.00777 degrees
+The difference may be attributed to python implicit type data conversion introduced by the wrappers.
+It may be possible to avoid this by typecasting variables when calling a wrapper.
+
+
+Timings
+-------
+NOVAS position functions operate in two accuracy modes full or reduced specified by the runtime parameter.
+
+0 = full accuracy 1365 term model.
+1 = reduced accuracy 488 term model. (error is 0.1 mas for stars, 3.5 mas for solar system bodies)
+
+Times are for 10^5 iterations of ICRS to ALT/AZ in seconds.
+
+C-NOVAS (low)    C-NOVAS (high)    C-SOFA 
+  1.56s            2.34s           85.78s
+
+NOVAS_Py (low)    NOVAS_Py (high)  Py_SOFA
+  8.20             8.44              N/A
+
+The SOFA libraries show surprising slow performance compared to NOVA.
+The libraries were rebuilt with execution optimisation -O3 option and a pre-built .so library was also tried but with no significant improvement. 
+
+
+Ephemerides
+-----------
+Default NOVAS installation provides JPL DE405 solar system ephemerides although these have now been superceded by DE431.
+ 
+Conclusion
+----------
+Both the NOVAS C and python are substantially faster than the SOFA libraries.
+For developing in python the NOVAS_Py provides comprehensive set of wrappers but with some minor differences with the documented C functions.
+
+
+
+
+
+
+
+
+

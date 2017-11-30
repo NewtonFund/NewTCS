@@ -1,0 +1,18 @@
+set title "NOVAS/SOFA ZD Difference with Observatory Location"
+
+set xtics nomirror out -180,30,180  
+set ytics nomirror out -90,30,90
+set xlabel "Longitude [degrees]"
+set ylabel "Latitude [degrees]"
+
+set xrange [-180:180]
+set yrange [-90:90]
+
+
+#set pm3d
+set view map
+set dgrid3d
+set pm3d interpolate 20,20
+set palette defined (-1 "blue", 0 "white", 1 "red") 
+set label 1 "XXX" at screen 1,1 
+splot "latlon.dat" using 2:1:(($3-$7)*360000) with pm3d

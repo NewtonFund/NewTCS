@@ -1,0 +1,9 @@
+#!/bin/bash
+gcc test.c  -o test  -lsofa_c -lm
+gcc lats.c  -o lats -lsofa_c -lm
+gcc latn.c  -o latn -lsofa_c -lm
+gcc test3.c -o test3 -lsofa_c -lm
+gcc lonn.c  -o lonn -lsofa_c -lm
+gcc objn.c  -o objn -lsofa_c -lm
+gcc latlon.c -o latlon -lsofa_c -lm
+gcc latlona.c -o latlona -lsofa_c -lm

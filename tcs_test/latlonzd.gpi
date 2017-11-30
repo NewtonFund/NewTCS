@@ -1,0 +1,28 @@
+set title "NOVAS/SOFA Zenith Distance (ZD) Difference with Location"
+
+set xtics nomirror out 
+set ytics nomirror out 
+set xlabel "Longitude [degrees]" 
+set ylabel "Latitude [degrees]"  
+set zlabel "Delta ZD [mas]" rotate by 90
+
+set palette defined (-1 "blue", 0 "grey90", 1 "red" ) 
+
+set xtics -180,30,180
+set ytics  -90,30,90
+
+set format z  "%5.2f"
+set format cb "%5.2f"
+set cblabel "Delta [mas]"
+set cbtics in nomirror offset -.5
+
+set xrange [-180:180]
+set yrange [-90:90]  
+set zrange [-0.1:0.1]
+
+set view 60,35,1,1.5
+set terminal X11 enhanced
+splot "latlon.dat" u 2:1:(($3-$5)*360000) not with pm3d at s, "" u 2:1:(($3-$5)*360000) not with pm3d at b  
+set terminal png truecolor nocrop enhanced font ",10"
+set output "latlonzd20170922.png"
+splot "latlon.dat" u 2:1:(($3-$5)*360000) not with pm3d at s, "" u 2:1:(($3-$5)*360000) not with pm3d at b  

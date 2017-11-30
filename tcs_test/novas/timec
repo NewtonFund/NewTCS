@@ -1,0 +1,5 @@
+#/bin/bash
+
+time ./testc 100000 0 > /dev/null 
+time ./testc 100000 1 > /dev/null
+
